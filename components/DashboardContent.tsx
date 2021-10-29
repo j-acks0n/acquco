@@ -19,13 +19,9 @@ const DashboardContent = ({ layouts, setLayouts }) => {
   // });
 
   const [breakpoints, setBreakpoints] = useState({
-    lg: 1200,
-    md: 996,
-    sm: 768,
-    xs: 480,
-    xxs: 0,
+    lg: 1200
   });
-  const [cols, setCols] = useState({ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 });
+  const [cols, setCols] = useState({ lg: 12 });
 
   const onBreakpointChange = (breakpoint, cols) => {
     setCols(cols);

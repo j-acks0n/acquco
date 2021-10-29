@@ -38,6 +38,7 @@ const Home: NextPage = () => {
       { i: "top5sellers_c", x: 4, y: 0, w: 4, h: 10 },
       { i: "top5ads_c", x: 4, y: 0, w: 4, h: 10 },
     ],
+
   });
   const onAddItem = (type) => {
     /*eslint no-console: 0*/
