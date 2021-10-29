@@ -1,7 +1,8 @@
-import dynamic from 'next/dynamic';
-const Line:any = dynamic(
+import dynamic from "next/dynamic";
+const Line: any = dynamic(
   () => import("@ant-design/charts").then((mod) => mod.Line) as any,
-  { ssr: false })
+  { ssr: false }
+);
 
 const data = [
   { year: "1991", value: 3 },

@@ -14,14 +14,10 @@ import {
 } from "@heroicons/react/outline";
 import Sidebar from "../components/Sidebar";
 import DashboardContent from "../components/DashboardContent";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: InboxIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
 ];
 
 export function classNames(...classes: string[]) {
@@ -30,6 +26,7 @@ export function classNames(...classes: string[]) {
 
 const Home: NextPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showTools, setShowTools] = useState(false);
   return (
     <>
       <div className="">
@@ -67,15 +64,36 @@ const Home: NextPage = () => {
         </div>
         <div className="md:pl-64 flex flex-col flex-1">
           <main>
-            <div className="py-6">
+            <div className="py-6 bg-[#F1F4F7] m-4 h-2/3">
               <div className="mx-auto px-4 sm:px-6 md:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Dashboard
-                </h1>
+                <div className="flex">
+                  <h1 className="text-3xl font-bold text-gray-900">
+                    Monitoring & Performance
+                  </h1>
+                  {showTools ? (
+                    <div
+                      className="text-3xl font-bold text-blue-900 ml-4 cursor-pointer"
+                      onClick={() => {
+                        setShowTools(false);
+                      }}
+                    >
+                      collapse
+                    </div>
+                  ) : (
+                    <PlusCircleIcon
+                      className="ml-2 w-8 h-8 self-center hover:text-blue-500 cursor-pointer"
+                      onClick={() => {
+                        setShowTools(true);
+                      }}
+                    />
+                  )}
+
+
+                </div>
               </div>
-              <div className="mx-auto px-4 sm:px-6 md:px-8 " style={{height: "500px"}}>
+              <div className="mx-auto px-4 sm:px-6 md:px-8 ">
                 {/* Replace with your content */}
-                <DashboardContent />
+                <DashboardContent showTools={showTools} />
 
                 {/* /End replace */}
               </div>

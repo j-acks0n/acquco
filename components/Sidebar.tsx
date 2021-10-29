@@ -11,14 +11,8 @@ import {
 } from "@heroicons/react/outline";
 import { classNames } from "../pages";
 
-
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: InboxIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
 ];
 
 const Sidebar = () => {
@@ -71,12 +65,8 @@ const Sidebar = () => {
                 </button>
               </div>
             </Transition.Child>
-            <div className="flex-shrink-0 flex items-center px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                alt="Workflow"
-              />
+            <div className="flex items-center flex-shrink-0 px-4 text-white text-3xl">
+              Acquco
             </div>
             <div className="mt-5 flex-1 h-0 overflow-y-auto">
               <nav className="px-2 space-y-1">
