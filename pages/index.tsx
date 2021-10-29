@@ -15,6 +15,8 @@ import {
 import Sidebar from "../components/Sidebar";
 import DashboardContent from "../components/DashboardContent";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import Tabs from "../components/Tabs";
+import { v4 as uuidv4 } from "uuid";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -27,6 +29,51 @@ export function classNames(...classes: string[]) {
 const Home: NextPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showTools, setShowTools] = useState(false);
+  const [layouts, setLayouts] = useState({
+    lg: [
+      { i: "revenue7Graph_a", x: 0, y: 0, w: 4, h: 10 },
+      { i: "revenueToday_b", x: 1, y: 0, w: 2, h: 2 },
+      { i: "revenue7display_c", x: 4, y: 0, w: 2, h: 2 },
+      { i: "profit7Graph_d", x: 0, y: 4, w: 4, h: 10 },
+      { i: "top5sellers_c", x: 4, y: 0, w: 4, h: 10 },
+      { i: "top5ads_c", x: 4, y: 0, w: 4, h: 10 },
+    ],
+  });
+  const onAddItem = (type) => {
+    /*eslint no-console: 0*/
+    let height = 4;
+    let width = 4;
+    if (type === "revenue7Graph") {
+      height = 10;
+      width = 4;
+    } else if (type === "revenueToday") {
+      height = 3;
+      width = 2;
+    } else if (type === "revenue7display") {
+      height = 3;
+      width = 2;
+    } else if (type === "profit7Graph") {
+      height = 10;
+      width = 4;
+    } else if (type === "top5sellers") {
+      height = 10;
+      width = 4;
+    } else if (type === "top5ads") {
+      height = 10;
+      width = 4;
+    }
+
+    setLayouts({
+      // Add a new item. It must have a unique key!
+      lg: layouts.lg.concat({
+        i: `${type}_${uuidv4()}`,
+        x: (layouts.lg.length * 2) % 12,
+        y: Infinity, // puts it at the bottom
+        w: width,
+        h: height,
+      }),
+    });
+  };
   return (
     <>
       <div className="">
@@ -58,6 +105,7 @@ const Home: NextPage = () => {
                     {item.name}
                   </a>
                 ))}
+                <Tabs onAddItem={onAddItem} />
               </nav>
             </div>
           </div>
@@ -70,30 +118,11 @@ const Home: NextPage = () => {
                   <h1 className="text-3xl font-bold text-gray-900">
                     Monitoring & Performance
                   </h1>
-                  {showTools ? (
-                    <div
-                      className="text-3xl font-bold text-blue-900 ml-4 cursor-pointer"
-                      onClick={() => {
-                        setShowTools(false);
-                      }}
-                    >
-                      collapse
-                    </div>
-                  ) : (
-                    <PlusCircleIcon
-                      className="ml-2 w-8 h-8 self-center hover:text-blue-500 cursor-pointer"
-                      onClick={() => {
-                        setShowTools(true);
-                      }}
-                    />
-                  )}
-
-
                 </div>
               </div>
               <div className="mx-auto px-4 sm:px-6 md:px-8 ">
                 {/* Replace with your content */}
-                <DashboardContent showTools={showTools} />
+                <DashboardContent layouts={layouts} setLayouts={setLayouts} />
 
                 {/* /End replace */}
               </div>

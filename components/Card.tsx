@@ -2,7 +2,7 @@ import { ScaleIcon } from "@heroicons/react/outline";
 
 const Card = ({ name, amount }) => {
   return (
-    <div className="w-60 h-20">
+    <div className="w-full h-full bg-white rounded-lg">
       <div className="relative flex-1 flex flex-col gap-2 px-4">
         <label className="text-gray-800 text-base font-semibold tracking-wider">
           {name}

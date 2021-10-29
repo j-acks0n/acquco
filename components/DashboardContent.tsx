@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { v4 as uuidv4 } from "uuid";
+
 import { XIcon } from "@heroicons/react/solid";
 import Tabs from "./Tabs";
 import HighGraph from "./HighGraph";
 import Highcharts from "highcharts";
+import Card from "./Card";
+import PieChart from "./PieChart";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const DashboardContent = ({ showTools, setShowTools }) => {
+const DashboardContent = ({ layouts, setLayouts }) => {
   // const [layouts, setLayouts] = useState({
   //   { i: "a", x: 0, y: 0, w: 1, h: 2 },
   //   { i: "b", x: 1, y: 0, w: 3, h: 2 },
   //   { i: "c", x: 4, y: 0, w: 1, h: 2 },
   //   { i: "d", x: 0, y: 2, w: 1, h: 2 },
   // });
-  const [layouts, setLayouts] = useState<any>({
-    lg: [
-      { i: "a", x: 0, y: 0, w: 1, h: 5 },
-      { i: "b", x: 1, y: 0, w: 1, h: 4 },
-      { i: "c", x: 4, y: 0, w: 1, h: 4 },
-      { i: "d", x: 0, y: 4, w: 1, h: 4 },
-    ],
-  });
+
   const [breakpoints, setBreakpoints] = useState({
     lg: 1200,
     md: 996,
@@ -32,25 +27,6 @@ const DashboardContent = ({ showTools, setShowTools }) => {
   });
   const [cols, setCols] = useState({ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 });
 
-  const onAddItem = (type) => {
-    /*eslint no-console: 0*/
-    let height = 4;
-    let width = 4;
-    if (type === "revenue7Graph") {
-      height = 12;
-      width = 4;
-    }
-    setLayouts({
-      // Add a new item. It must have a unique key!
-      lg: layouts.lg.push({
-        i: `${type}_uuidv4()`,
-        x: (layouts.lg.length * 2) % 12,
-        y: Infinity, // puts it at the bottom
-        w: width,
-        h: height
-      }),
-    });
-  };
   const onBreakpointChange = (breakpoint, cols) => {
     setCols(cols);
     setBreakpoints(breakpoint);
@@ -71,11 +47,9 @@ const DashboardContent = ({ showTools, setShowTools }) => {
     }
     setLayouts({ lg: layouts });
   };
-
+  console.log(layouts);
   return (
     <div className="">
-      {showTools && <Tabs onAddItem={onAddItem} />}
-
       {/* <div
         onClick={() => {
           onAddItem();
@@ -95,7 +69,7 @@ const DashboardContent = ({ showTools, setShowTools }) => {
         {layouts.lg.map((itm, i) => (
           <div key={itm.i} data-grid={itm} className="block">
             <XIcon
-              className="h-4 w-4 absolute right-2 top-0 cursor-pointer"
+              className="h-4 w-4 absolute right-2 top-0 cursor-pointer z-50"
               onClick={() => {
                 onRemoveItem(itm.i);
               }}
@@ -103,6 +77,34 @@ const DashboardContent = ({ showTools, setShowTools }) => {
             {itm.i.split("_")[0] === "revenue7Graph" && (
               <>
                 <HighGraph type={2} />
+              </>
+            )}
+            {itm.i.split("_")[0] === "revenueToday" && (
+              <>
+                <Card name="Revenue Today" amount={120} />
+              </>
+            )}
+            {itm.i.split("_")[0] === "revenue7display" && (
+              <>
+                <Card name="Revenue (7 days)" amount={1020} />
+              </>
+            )}
+
+            {itm.i.split("_")[0] === "profit7Graph" && (
+              <>
+                <HighGraph type={1} />
+              </>
+            )}
+
+            {itm.i.split("_")[0] === "top5sellers" && (
+              <>
+                <PieChart type={2} />
+              </>
+            )}
+
+            {itm.i.split("_")[0] === "top5ads" && (
+              <>
+                <PieChart type={1} />
               </>
             )}
           </div>

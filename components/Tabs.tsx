@@ -11,7 +11,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Tabs = ({onAddItem}) => {
+const Tabs = ({ onAddItem }) => {
   let [categories] = useState({
     Recent: [
       {
@@ -63,124 +63,149 @@ const Tabs = ({onAddItem}) => {
     ],
   });
   return (
-    <div className="w-full px-2  py-8 sm:px-0">
-      <Tab.Group>
-        <Tab.List className="flex p-1 space-x-1 bg-white rounded-xl">
-          <Tab
-            key={"instant_data"}
-            className={({ selected }) =>
-              classNames(
-                "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
-                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
-                selected
-                  ? "bg-white shadow"
-                  : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
-              )
-            }
-          >
-            Instant Data
-          </Tab>
-          <Tab
-            key={"historical_data"}
-            className={({ selected }) =>
-              classNames(
-                "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
-                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
-                selected
-                  ? "bg-white shadow"
-                  : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
-              )
-            }
-          >
-            Historical Data
-          </Tab>
-          <Tab
-            key={"graphical_data"}
-            className={({ selected }) =>
-              classNames(
-                "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
-                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
-                selected
-                  ? "bg-white shadow"
-                  : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
-              )
-            }
-          >
-            Graphical Data
-          </Tab>
-        </Tab.List>
-        <Tab.Panels className="mt-2">
-          <Tab.Panel
-            key={"instant_data"}
-            className={classNames(
-              "bg-white rounded-xl p-3",
-              "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
-            )}
-          >
-            <div className="flex">
-              <Card name="Revenue Today" amount={120} />
-              <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer"  onClick={() => {onAddItem()}}/>
-            </div>
-          </Tab.Panel>
-          <Tab.Panel
-            key={"historical_data"}
-            className={classNames(
-              "bg-white rounded-xl p-3",
-              "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
-            )}
-          >
-            <div className="flex">
-              <Card name="Revenue (7 days)" amount={1020} />
-              <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer" />
-            </div>
-          </Tab.Panel>
-          <Tab.Panel
-            key={"graphical_data"}
-            className={classNames(
-              "bg-white rounded-xl p-3",
-              "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
-            )}
-          >
-            <div className="grid grid-cols-2">
-              <div className="">
-                <div className="text-xl  font-bold">Graph</div>
-                <div className="grid grid-cols-2">
-                  <div className="relative">
-                    <HighGraph type={2} />
-                    <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500" onClick={() => {onAddItem("revenue7Graph")}} />
-
+    <div className="">
+      <div className="w-full px-2  py-8 sm:px-0">
+        <Tab.Group>
+          <Tab.List className="flex p-1 space-x-1 bg-white rounded-xl">
+            <Tab
+              key={"instant_data"}
+              className={({ selected }) =>
+                classNames(
+                  "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
+                  selected
+                    ? "bg-white shadow"
+                    : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
+                )
+              }
+            >
+              Instant Data
+            </Tab>
+            <Tab
+              key={"historical_data"}
+              className={({ selected }) =>
+                classNames(
+                  "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
+                  selected
+                    ? "bg-white shadow"
+                    : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
+                )
+              }
+            >
+              Historical Data
+            </Tab>
+            <Tab
+              key={"graphical_data"}
+              className={({ selected }) =>
+                classNames(
+                  "w-full py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60",
+                  selected
+                    ? "bg-white shadow"
+                    : "text-blue-100 hover:bg-gray-700/[0.12] hover:text-black"
+                )
+              }
+            >
+              Graphical Data
+            </Tab>
+          </Tab.List>
+          <Tab.Panels className="mt-2">
+            <Tab.Panel
+              key={"instant_data"}
+              className={classNames(
+                "bg-white rounded-xl p-3",
+                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
+              )}
+            >
+              <div className="flex">
+                <Card name="Revenue Today" amount={120} />
+                <PlusCircleIcon
+                  className="h-6 w-6 self-end cursor-pointer"
+                  onClick={() => {
+                    onAddItem("revenueToday");
+                  }}
+                />
+              </div>
+            </Tab.Panel>
+            <Tab.Panel
+              key={"historical_data"}
+              className={classNames(
+                "bg-white rounded-xl p-3",
+                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
+              )}
+            >
+              <div className="flex">
+                <Card name="Revenue (7 days)" amount={1020} />
+                <PlusCircleIcon
+                  className="h-6 w-6 self-end cursor-pointer"
+                  onClick={() => {
+                    onAddItem("revenue7display");
+                  }}
+                />
+              </div>
+            </Tab.Panel>
+            <Tab.Panel
+              key={"graphical_data"}
+              className={classNames(
+                "bg-white rounded-xl p-3",
+                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-gray-400 ring-white ring-opacity-60"
+              )}
+            >
+              <div className="grid grid-cols-1 gap-y-6">
+                <div className="">
+                  <div className="text-xl  font-bold text-center">Graph</div>
+                  <div className="grid grid-cols-1 gap-y-6">
+                    <div className="relative">
+                      <HighGraph type={2} />
+                      <PlusCircleIcon
+                        className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500"
+                        onClick={() => {
+                          onAddItem("revenue7Graph");
+                        }}
+                      />
+                    </div>
+                    <div className="relative">
+                      <HighGraph type={1} />
+                      <PlusCircleIcon
+                        className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500"
+                        onClick={() => {
+                          onAddItem("profit7Graph");
+                        }}
+                      />
+                    </div>
                   </div>
-                  <div className="relative">
-                    <HighGraph type={1} />
-                    <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500" />
-
+                </div>
+                <div className="">
+                  <div className="text-xl  font-bold text-center">
+                    Pie chart
+                  </div>
+                  <div className="grid grid-cols-1 gap-y-6">
+                    <div className="relative">
+                      <PieChart type={2} />
+                      <PlusCircleIcon
+                        className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500"
+                        onClick={() => {
+                          onAddItem("top5sellers");
+                        }}
+                      />
+                    </div>
+                    <div className="relative">
+                      <PieChart type={1} />
+                      <PlusCircleIcon
+                        className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500"
+                        onClick={() => {
+                          onAddItem("top5ads");
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="">
-                <div className="text-xl  font-bold">Pie chart</div>
-                <div className="grid grid-cols-2">
-                  <div className="relative">
-                    <div className="text-base text-center font-normal mb-2">
-                      Top 5 Sellers
-                    </div>
-                    <PieChart type={2} />
-                    <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500" />
-
-                  </div>
-                  <div className="relative">
-                    <div className="text-base text-center font-normal mb-2">
-                      Top 5 ads
-                    </div>
-                    <PieChart type={1} />
-                    <PlusCircleIcon className="h-6 w-6 self-end cursor-pointer absolute right-2 bottom-3 hover:text-blue-500" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
     </div>
   );
 };
